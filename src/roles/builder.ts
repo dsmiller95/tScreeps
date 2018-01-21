@@ -29,7 +29,14 @@ export default class Builder implements Role {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             } else {
-                creep.moveTo(25, 20);
+                const controller = creep.room.controller;
+                if(controller){
+                    if (creep.upgradeController(controller) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(controller.pos, {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                } else {
+                    creep.moveTo(25, 20);
+                }
             }
         } else {
             const sources = creep.room.find(FIND_SOURCES);

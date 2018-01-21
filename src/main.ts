@@ -34,6 +34,8 @@ export const loop = ErrorMapper.wrapLoop(() => {
     }
   }
   Memory.desiredTypes[ROLE_TYPE.ROLE_BUILDER] = constructionSites;
+
+  Memory.desiredTypes[ROLE_TYPE.ROLE_UPGRADER] = _.map(Game.rooms, (room) => room.controller).filter(s => s).length;
   //Count up how many creeps of each role there are; compared to desired amounts
   const rolesCount: {[type: string]: number} = {};
   Object.keys(ROLE_TYPE).map(name => ROLE_TYPE[name as any])
